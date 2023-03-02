@@ -10,10 +10,10 @@ const displayAllData = (data) => {
         const div = document.createElement('div')
         div.innerHTML = `
         <div class="w-full bg-white border border-gray-200 rounded-lg shadow">
-        <a href="#">
-            <img class="rounded-lg p-4 h-72 w-full" src="${value.image}" alt="" />
-        </a>
-        <div class="p-4">
+        <div class="m-4">
+            <img class="rounded-lg h-72 w-full" src="${value.image}" alt="" />
+        </div>
+        <div class="m-4">
             <h5 class="mb-2 text-2xl font-bold">Features</h5>
             <p class="mb-3 font-medium text-gray-600">1.${value.features[0]}<p>
             <p class="mb-3 font-medium text-gray-600">2.${value.features[1]}<p>
