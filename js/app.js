@@ -29,7 +29,7 @@ const displaySixData = (data) => {
                 <p class="font-medium text-gray-600"><i class="fa-solid fa-calendar-days mr-2"></i>${value.published_in}</p>
             </div>
             <div class="flex h-9 w-9 rounded-full items-center bg-red-200">
-            <label for="my-modal-3"><i class="fa-solid text-red-500 m-2 fa-arrow-right"></i></label>
+            <label for="my-modal-3" onclick="openModalFetch('${value.id}')"><i class="fa-solid text-red-500 m-2 fa-arrow-right"></i></label>
             </div>
             
         </div>
@@ -56,7 +56,7 @@ const displayAllData = (data) => {
     const cardContainer = document.getElementById('cardContainer');
     cardContainer.innerHTML = '';
     data.forEach((value) =>{
-        console.log(value)
+        // console.log(value.id)
         const div = document.createElement('div')
         div.innerHTML = `
         <div class="w-full bg-white border border-gray-200 rounded-lg shadow">
@@ -76,7 +76,7 @@ const displayAllData = (data) => {
                 <p class="font-medium text-gray-600"><i class="fa-solid fa-calendar-days mr-2"></i>${value.published_in}</p>
             </div>
             <div class="flex h-9 w-9 rounded-full items-center bg-red-200">  
-        <label for="my-modal-3"><i class="fa-solid text-red-500 m-2 fa-arrow-right"></i></label>
+        <label for="my-modal-3" onclick="openModalFetch('${value.id}')"><i class="fa-solid text-red-500 m-2 fa-arrow-right"></i></label>
             </div>
         </div>
     </div>
@@ -86,10 +86,17 @@ const displayAllData = (data) => {
 }
 // click see more this function working end
 
-const openModalFetch = () =>{
-
+// click arrow and model open
+const openModalFetch = (id) =>{
+    const url = `https://openapi.programming-hero.com/api/ai/tool/${id}`
+    fetch(url)
+    .then((res) => res.json())
+    .then((data) => modalDataShow(data.data))
 }
 
+const modalDataShow = (data) =>{
+    console.log(data)
+}
 
 fetchSixData();
 
