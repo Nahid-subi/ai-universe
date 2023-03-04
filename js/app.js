@@ -24,7 +24,7 @@ const displaySixData = (data) => {
             <h5 class="mb-2 text-2xl font-bold">Features</h5>
             <p class="mb-3 font-medium text-gray-600">1.${value.features[0]}<p>
             <p class="mb-3 font-medium text-gray-600">2.${value.features[1]}<p>
-            <p class="mb-3 font-medium text-gray-600">3.${value.features[2] ? value.features : 'Not Available'}<p>
+            <p class="mb-3 font-medium text-gray-600" style="${value.features[2] ? value.features : 'display:none'}">3.${value.features[2] ? value.features : 'Not Available'}<p>
         </div>
         <hr class="w-11/12 h-0.5 bg-gray-500 mx-auto my-3">
         <div class="flex justify-between m-4">
@@ -70,7 +70,7 @@ const displayAllData = (data) => {
             <h5 class="mb-2 text-2xl font-bold">Features</h5>
             <p class="mb-3 font-medium text-gray-600">1.${value.features[0]}<p>
             <p class="mb-3 font-medium text-gray-600">2.${value.features[1]}<p>
-            <p class="mb-3 font-medium text-gray-600">3.${value.features[2] ? value.features : 'Not Available'}<p>
+            <p class="mb-3 font-medium text-gray-600" style="${value.features[2] ? value.features : 'display:none'}">3.${value.features[2] ? value.features : 'Not Available'}<p>
         </div>
         <hr class="w-11/12 h-0.5 bg-gray-500 mx-auto my-3">
         <div class="flex justify-between m-4">
