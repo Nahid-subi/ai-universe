@@ -95,8 +95,8 @@ const openModalFetch = (id) =>{
 }
 
 const modalDataShow = (data) =>{
-    console.log(data.features)
-    console.log(console.log(Object.values(data.features[2])[0]))
+    console.log(data)    
+    // console.log(console.log(Object.values(data.integrations)[0]))
     const containerModel = document.getElementById("containerModel");
     containerModel.innerHTML = '';
     const div = document.createElement('div')
@@ -136,9 +136,9 @@ const modalDataShow = (data) =>{
             </div>
             <div>
                 <h3 class="font-semibold text-lg">Integrations</h3>
-                <li class="font-medium text-gray-600">dd</li>
-                <li class="font-medium text-gray-600">Multilingual support</li>
-                <li class="font-medium text-gray-600">Seamless integration</li>
+                <li class="font-medium text-gray-600">${(Object.values(data.integrations)[0])}</li>
+                <li class="font-medium text-gray-600">${(Object.values(data.integrations)[1] === undefined) && 'No data Found' ? 'No data Found' : Object.values(data.integrations)[1]}</li>
+                <li class="font-medium text-gray-600">${(Object.values(data.integrations)[2] === undefined) && 'No data Found' ? 'No data Found' : Object.values(data.integrations)[2]}</li>
             </div>
 
         </div>
@@ -147,7 +147,7 @@ const modalDataShow = (data) =>{
         <div class="relative">
             <img class="h-72 w-full rounded-lg" src="${data.image_link[0]}" alt="">
             <div class="absolute bottom-64 left-2/3 ">
-                <p class="bg-red-500 rounded-lg text-white font-semibold px-2">${data.accuracy.score} accuracy
+                <p id="none-display" class="bg-red-500 rounded-lg text-white font-semibold px-2">${data.accuracy.score} accuracy
                 </p>
             </div>
         </div>
