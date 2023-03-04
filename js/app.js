@@ -1,16 +1,19 @@
+// global fetch data variable
+let fetchData = []
 // loader 6 data fetch
-const fetchSixData = () =>{
+const fetchSixData = () => {
     fetch("https://openapi.programming-hero.com/api/ai/tools")
-    .then((res) => res.json())
-    .then((data) => displaySixData(data.data.tools))
+        .then((res) => res.json())
+        .then((data) => {
+            fetchData = data.data.tools;
+            displaySixData(data.data.tools)
+        });
 };
 // display 6 data function
 const displaySixData = (data) => {
-    // console.log(data)
     const cardContainer = document.getElementById('cardContainer');
     cardContainer.innerHTML = '';
-    data.slice(0,6).forEach((value) =>{
-        // console.log(value)
+    data.slice(0, 6).forEach((value) => {
         const div = document.createElement('div')
         div.innerHTML = `
         <div class="w-full bg-white border border-gray-200 rounded-lg shadow">
@@ -36,7 +39,7 @@ const displaySixData = (data) => {
         </div>
     </div>
         `
-       cardContainer.appendChild(div)
+        cardContainer.appendChild(div)
     })
     // stop loader
     const loaderSection = document.getElementById('loader');
@@ -45,10 +48,10 @@ const displaySixData = (data) => {
 
 // click see more this function working start
 // loader all data fetch
-const fetchAllData = () =>{
+const fetchAllData = () => {
     fetch("https://openapi.programming-hero.com/api/ai/tools")
-    .then((res) => res.json())
-    .then((data) => displayAllData(data.data.tools))
+        .then((res) => res.json())
+        .then((data) => displayAllData(data.data.tools))
 };
 // display all data function
 const displayAllData = (data) => {
@@ -56,8 +59,7 @@ const displayAllData = (data) => {
     showAll.classList.add('hidden');
     const cardContainer = document.getElementById('cardContainer');
     cardContainer.innerHTML = '';
-    data.forEach((value) =>{
-        // console.log(value.id)
+    data.forEach((value) => {
         const div = document.createElement('div')
         div.innerHTML = `
         <div class="w-full bg-white border border-gray-200 rounded-lg shadow">
@@ -82,22 +84,20 @@ const displayAllData = (data) => {
         </div>
     </div>
         `
-       cardContainer.appendChild(div)
+        cardContainer.appendChild(div)
     })
 }
 // click see more this function working end
 
 // click arrow and model open
-const openModalFetch = (id) =>{
+const openModalFetch = (id) => {
     const url = `https://openapi.programming-hero.com/api/ai/tool/${id}`
     fetch(url)
-    .then((res) => res.json())
-    .then((data) => modalDataShow(data.data))
+        .then((res) => res.json())
+        .then((data) => modalDataShow(data.data))
 }
-
-const modalDataShow = (data) =>{
-    console.log(data)   
-    // console.log((data.accuracy.score === null) && 'No data Found' ? 'No data Found' : (Object.values(data.integrations)[2] === undefined) && 'No data Found' ? 'No data Found' : Object.values(data.integrations)[2])    
+// this function for display modal
+const modalDataShow = (data) => {
     const containerModel = document.getElementById("containerModel");
     containerModel.innerHTML = '';
     const div = document.createElement('div')
@@ -113,7 +113,7 @@ const modalDataShow = (data) =>{
             <div
                 class="bg-white text-green-600 w-24 h-20 font-bold rounded-lg flex flex-col justify-center items-center">
                 <p>${(data.pricing === null) && 'No data Found' ? 'No data Found' : data.pricing[0].plan}</p>
-                <p>${(data.pricing === null) && 'No data Found' ? 'No data Found' :(data.pricing[0].price === '0' || data.pricing[0].price === 'No cost') && 'free of cost' ? 'free of cost' : data.pricing[0].price}
+                <p>${(data.pricing === null) && 'No data Found' ? 'No data Found' : (data.pricing[0].price === '0' || data.pricing[0].price === 'No cost') && 'free of cost' ? 'free of cost' : data.pricing[0].price}
                 </p>
             </div>
             <div
@@ -124,8 +124,8 @@ const modalDataShow = (data) =>{
             </div>
             <div
                 class="bg-white text-red-500 w-24 h-20 font-bold rounded-lg flex flex-col justify-center items-center">
-                <p>${(data.pricing === null) && 'No data Found' ? 'No data Found' :data.pricing[2].plan}</p>
-                <p>${(data.pricing === null) && 'No data Found' ? 'No data Found' :(data.pricing[1].price === '0' || data.pricing[1].price === 'No cost') && 'free of cost' ? 'free of cost' : data.pricing[2].price}</p>
+                <p>${(data.pricing === null) && 'No data Found' ? 'No data Found' : data.pricing[2].plan}</p>
+                <p>${(data.pricing === null) && 'No data Found' ? 'No data Found' : (data.pricing[1].price === '0' || data.pricing[1].price === 'No cost') && 'free of cost' ? 'free of cost' : data.pricing[2].price}</p>
             </div>
         </div>
         <div class="flex gap-4 flex-wrap justify-center">
@@ -137,9 +137,9 @@ const modalDataShow = (data) =>{
             </div>
             <div>
                 <h3 class="font-semibold text-lg">Integrations</h3>
-                <li class="font-medium text-gray-600">${(data.integrations === null) && 'No data Found' ? 'No data Found' :(Object.values(data.integrations)[0])}</li>
-                <li class="font-medium text-gray-600" style="${data.integrations === null || (Object.values(data.integrations)[2] === undefined) ? 'display: none' : ''}">${(data.integrations === null) && 'No data Found' ? 'No data Found' :(Object.values(data.integrations)[1] === undefined) && 'No data Found' ? 'No data Found' : Object.values(data.integrations)[1]}</li>
-                <li class="font-medium text-gray-600" style="${data.integrations === null || (Object.values(data.integrations)[2] === undefined) ? 'display: none' : ''}">${(data.integrations === null) && 'No data Found' ? 'No data Found' :(Object.values(data.integrations)[2] === undefined) && 'No data Found' ? 'No data Found' : Object.values(data.integrations)[2]}</li>
+                <li class="font-medium text-gray-600">${(data.integrations === null) && 'No data Found' ? 'No data Found' : (Object.values(data.integrations)[0])}</li>
+                <li class="font-medium text-gray-600" style="${data.integrations === null || (Object.values(data.integrations)[2] === undefined) ? 'display: none' : ''}">${(data.integrations === null) && 'No data Found' ? 'No data Found' : (Object.values(data.integrations)[1] === undefined) && 'No data Found' ? 'No data Found' : Object.values(data.integrations)[1]}</li>
+                <li class="font-medium text-gray-600" style="${data.integrations === null || (Object.values(data.integrations)[2] === undefined) ? 'display: none' : ''}">${(data.integrations === null) && 'No data Found' ? 'No data Found' : (Object.values(data.integrations)[2] === undefined) && 'No data Found' ? 'No data Found' : Object.values(data.integrations)[2]}</li>
             </div>
 
         </div>
@@ -156,9 +156,9 @@ const modalDataShow = (data) =>{
         </div>
         <div class="my-2">
             <h1 class="font-semibold text-lg text-center">${(data.input_output_examples
-                === null) && 'No data Found' ? 'No data Found' :data.input_output_examples[0].input}</h1>
+            === null) && 'No data Found' ? 'No data Found' : data.input_output_examples[0].input}</h1>
             <p class="font-medium text-gray-600 text-center">${(data.input_output_examples
-                === null) && 'No data Found' ? 'No data Found' :data.input_output_examples[0].output}</p>
+            === null) && 'No data Found' ? 'No data Found' : data.input_output_examples[0].output}</p>
         </div>
     </div>
 </div>
@@ -168,29 +168,13 @@ const modalDataShow = (data) =>{
 
 fetchSixData();
 
+// this function for display modal end
 
+// short by date end start
 
-// const shortByDate = () =>{
-//     fetch("https://openapi.programming-hero.com/api/ai/tools")
-//     .then((res) => res.json())
-//     .then((data) => sortByDateScreen(data.data.tools))
-// };
+const showDataBYShortByDate = () => {
+    const sortedArray = fetchData.sort((a, b) => Date.parse(new Date(a.published_in)) - Date.parse(new Date(b.published_in)));
+    displayAllData(sortedArray);
+}
 
-// const sortByDateScreen = (data) => {
-//     data.forEach(data = value =>{
-//         console.log(value.sort(dateShow))
-//     })
-
-    
-   
-    
-// }
-// const dateShow = (a , b) =>{
-//     const dateA = a.published_in
-//     const dateB = b.published_in
-//     if(dateA < dateB) return 1;
-//     else if(dateA > dateB) return -1;
-//     return 0;
-
-// }
-// shortByDate()
+// short by date end
