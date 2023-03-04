@@ -95,7 +95,70 @@ const openModalFetch = (id) =>{
 }
 
 const modalDataShow = (data) =>{
-    console.log(data)
+    console.log(data.features)
+    console.log(console.log(Object.values(data.features[2])[0]))
+    const containerModel = document.getElementById("containerModel");
+    containerModel.innerHTML = '';
+    const div = document.createElement('div')
+    div.innerHTML = `
+    
+    <div class=" gap-4 flex lg:flex-row md:flex-col flex-col">
+    <div class="lg:w-1/2 w:full md:full border my-12 border-red-600 bg-red-50 rounded-lg">
+        <div>                   
+            <p class="font-semibold text-base lg:text-lg md:text-lg">${data.description}</p>
+        </div>
+        <div
+            class="flex flex-wrap justify-center md:justify-evenly gap-2 lg:justify-evenly my-5">
+            <div
+                class="bg-white text-green-600 w-24 h-20 font-bold rounded-lg flex flex-col justify-center items-center">
+                <p>${data.pricing[0].plan}</p>
+                <p>${(data.pricing[0].price === '0' || data.pricing[0].price === 'No cost') && 'free of cost' ? 'free of cost' : data.pricing[0].price}
+                </p>
+            </div>
+            <div
+                class="bg-white text-amber-600 w-24 h-20 font-bold rounded-lg flex flex-col justify-center items-center">
+                <p>${data.pricing[1].plan}</p>
+                <p>${(data.pricing[1].price === '0' || data.pricing[1].price === 'No cost') && 'free of cost' ? 'free of cost' : data.pricing[1].price}
+                </p>
+            </div>
+            <div
+                class="bg-white text-red-500 w-24 h-20 font-bold rounded-lg flex flex-col justify-center items-center">
+                <p>${data.pricing[2].plan}</p>
+                <p>${(data.pricing[1].price === '0' || data.pricing[1].price === 'No cost') && 'free of cost' ? 'free of cost' : data.pricing[2].price}</p>
+            </div>
+        </div>
+        <div class="flex gap-4 flex-wrap justify-center">
+            <div>
+                <h3 class="font-semibold text-lg">Features</h3>
+                <li class="font-medium text-gray-600">${(Object.values(data.features[1])[0])}</li>
+                <li class="font-medium text-gray-600">${(Object.values(data.features[2])[0])}</li>
+                <li class="font-medium text-gray-600">${(Object.values(data.features[3])[0])}</li>
+            </div>
+            <div>
+                <h3 class="font-semibold text-lg">Integrations</h3>
+                <li class="font-medium text-gray-600">dd</li>
+                <li class="font-medium text-gray-600">Multilingual support</li>
+                <li class="font-medium text-gray-600">Seamless integration</li>
+            </div>
+
+        </div>
+    </div>
+    <div class="lg:w-1/2 w-full md:w-full border border-slate-400 my-12 rounded-lg">
+        <div class="relative">
+            <img class="h-72 w-full rounded-lg" src="${data.image_link[0]}" alt="">
+            <div class="absolute bottom-64 left-2/3 ">
+                <p class="bg-red-500 rounded-lg text-white font-semibold px-2">${data.accuracy.score} accuracy
+                </p>
+            </div>
+        </div>
+        <div class="my-2">
+            <h1 class="font-semibold text-lg text-center">${data.input_output_examples[0].input}</h1>
+            <p class="font-medium text-gray-600 text-center">${data.input_output_examples[0].output}</p>
+        </div>
+    </div>
+</div>
+    `
+    containerModel.appendChild(div)
 }
 
 fetchSixData();
